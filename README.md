@@ -37,14 +37,14 @@ rf1996.open('COM5', function(err) { // Open device connected to certain COM port
 		/*
 			Example output: { 
 				port: '\\\\.\\COM5',
-  				device: 'Adapter RF-1996-125 Khz',
- 				serial: '820',
-  				model: '2081',
-  				firmware: '418',
-  				license: 'License 01.01.2016',
-  				cards: '10'
-  			}
-  		*/
+				device: 'Adapter RF-1996-125 Khz',
+				serial: '820',
+				model: '2081',
+				firmware: '418',
+				license: 'License 01.01.2016',
+				cards: '10'
+			}
+		*/
 		setInterval(function() {
 			var data = rf1996.read(); // Read card data
 			if(data.emMarine != val && data.emMarine != '[0000] 000,00000') {
@@ -53,12 +53,11 @@ rf1996.open('COM5', function(err) { // Open device connected to certain COM port
 				/*
 					Example output: { 
 						card: 'Temic protected by password',
-  						temic: 'b3 c5 da 4F fc b2 aa b5 ',
-  						emMarine: '[0000] 000,00582',
-  						locksLimit: '1',
-  						locks: '0',
-  						lastBoxId: '601',
-  						battery: 'Discharged'
+						temic: 'b3 c5 da 4F fc b2 aa b5 ',
+						emMarine: '[0000] 000,00582',
+						locksLimit: '1',
+						locks: '0',
+						battery: 'Discharged'
 					}
 				*/ 
 			} else if(data.emMarine != val && data.emMarine == '[0000] 000,00000' && val != null) {
