@@ -1,0 +1,17 @@
+{
+  "name": "rf1996",
+  "version": "1.0.0",
+  "scripts": {
+  	"install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "description": "Ironlogic RF1996 library wrapper for Node.js.",
+  "main": "index.js",
+  "keywords": ["ironlogic", "rf1996", "temic", "rfid", "Em-Marine"],
+  "author": "Pavel Bakharev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bakharevpavel/node-rf1996.git"
+  }
+}
