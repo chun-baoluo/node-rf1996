@@ -48,6 +48,10 @@ typedef BOOL  (*pfnIsDeviceOpen)();
 typedef DWORD (*pfnGetDeviceInfoA)(SDeviceInfoA *DevInfo);
 typedef DWORD (*pfnReadCard)(SCardInfo* CardInfo);					
 
+typedef DWORD (*pfnWriteCard)(DWORD LimitLocks);
+typedef DWORD (*pfnInitCard)(BYTE *EmMarineCode);
+
+
 HMODULE lib;
 SCardInfo CardInfo;
 SDeviceInfoA DeviceInfo;
@@ -58,3 +62,6 @@ pfnIsDeviceOpen IsDeviceOpen;
 pfnReadCard ReadCard;
 pfnCloseDevice CloseDevice;
 pfnGetDeviceInfoA GetDeviceInfoA;
+
+pfnWriteCard WriteCard;
+pfnInitCard	InitCard;

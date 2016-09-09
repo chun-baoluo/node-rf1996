@@ -24,6 +24,10 @@ Reads connected device info.
 
 Reads card data.
 
+### .write(object)
+
+Write EmMarine data to a card. Returns object with information about operation status. Expects first argument to be an object.
+
 ## Example usage
 
 ```js
@@ -45,6 +49,13 @@ rf1996.open('COM5', function(err) { // Open device connected to certain COM port
 				cards: '10'
 			}
 		*/
+
+		rf1996.write({ // Writes [0099] 125,00123
+			brackets: 99,
+			group: 125,
+			decimal: 123
+		});
+
 		setInterval(function() {
 			var data = rf1996.read(); // Read card data
 			if(data.emMarine != val && data.emMarine != '[0000] 000,00000') {

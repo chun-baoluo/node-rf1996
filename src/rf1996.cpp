@@ -13,7 +13,8 @@ void open(const FunctionCallbackInfo<Value>& args) {
 	Isolate* isolate = args.GetIsolate();
 	Local<Function> cb = Local<Function>::Cast(args[1]);
 
-	lib = LoadLibrary(_T("./node_modules/rf1996/src/rf1996.dll"));
+	//lib = LoadLibrary(_T("./node_modules/rf1996/src/rf1996.dll"));
+	lib = LoadLibrary(_T("./src/rf1996.dll"));
 	if(!lib) {
 		error = "RF1996.dll not found! The default path is './node_modules/rf1996/src/rf1996.dll'. Try to change the path in rf1996.cpp and recompile the module using node-gyp rebuild.";
 	} else {
@@ -24,6 +25,9 @@ void open(const FunctionCallbackInfo<Value>& args) {
 		CloseDevice = (pfnCloseDevice)GetProcAddress(lib,  "CloseDevice");	
 
 		GetDeviceInfoA = (pfnGetDeviceInfoA)GetProcAddress(lib,	"GetDeviceInfoA");
+
+		WriteCard	= (pfnWriteCard)GetProcAddress(lib,	"WriteCard");
+		InitCard			= (pfnInitCard)GetProcAddress(lib, "InitCard");
 
 		InitLib();
 
@@ -46,7 +50,7 @@ void read(const FunctionCallbackInfo<Value>& args) {
 	int len = 0;
 	TCHAR str[128], strEm[128];
 	Isolate* isolate = args.GetIsolate();
-	Local<Object> obj = Object::New(isolate);;
+	Local<Object> obj = Object::New(isolate);
 	
 	Local<Function> cb = Local<Function>::Cast(args[1]);
 
@@ -97,6 +101,28 @@ void read(const FunctionCallbackInfo<Value>& args) {
 
     args.GetReturnValue().Set(obj);
 	
+}
+
+// Write card
+void write(const FunctionCallbackInfo<Value>& args) {
+	Isolate* isolate = args.GetIsolate();
+	Local<Object> returnObj = Object::New(isolate);
+	if(args[0]->IsObject()) {
+		Handle<Object> obj = Handle<Object>::Cast(args[0]);
+		BYTE	EmMarineCode[5];
+		u_short *SquareBrackets = reinterpret_cast<u_short*>(&(EmMarineCode[3]));
+		u_short *Decimal = reinterpret_cast<u_short*>(&(EmMarineCode[0]));
+
+		*SquareBrackets = u_short(obj->Get(String::NewFromUtf8(isolate, "brackets"))->NumberValue());
+		*Decimal = u_short(obj->Get(String::NewFromUtf8(isolate, "decimal"))->NumberValue());
+		EmMarineCode[2] = (BYTE)obj->Get(String::NewFromUtf8(isolate, "group"))->NumberValue();
+		InitCard(EmMarineCode);
+		returnObj->Set(String::NewFromUtf8(isolate, "success"), True(isolate));
+	} else {
+		returnObj->Set(String::NewFromUtf8(isolate, "success"), False(isolate));
+		returnObj->Set(String::NewFromUtf8(isolate, "reason"), String::NewFromUtf8(isolate, "First argument isn't an object!"));
+	}
+	args.GetReturnValue().Set(returnObj);
 }
 
 // Get device info
@@ -162,6 +188,7 @@ void close(const FunctionCallbackInfo<Value>& args) {
 void RegisterModule(Local<Object> exports) {
 	NODE_SET_METHOD(exports, "open", open);
 	NODE_SET_METHOD(exports, "read", read);
+	NODE_SET_METHOD(exports, "write", write);
 	NODE_SET_METHOD(exports, "device", device);
 	NODE_SET_METHOD(exports, "close", close);
 }
