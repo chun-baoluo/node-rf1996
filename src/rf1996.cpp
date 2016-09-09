@@ -13,8 +13,8 @@ void open(const FunctionCallbackInfo<Value>& args) {
 	Isolate* isolate = args.GetIsolate();
 	Local<Function> cb = Local<Function>::Cast(args[1]);
 
-	//lib = LoadLibrary(_T("./node_modules/rf1996/src/rf1996.dll"));
-	lib = LoadLibrary(_T("./src/rf1996.dll"));
+	lib = LoadLibrary(_T("./node_modules/rf1996/src/rf1996.dll"));
+	// lib = LoadLibrary(_T("./src/rf1996.dll"));
 	if(!lib) {
 		error = "RF1996.dll not found! The default path is './node_modules/rf1996/src/rf1996.dll'. Try to change the path in rf1996.cpp and recompile the module using node-gyp rebuild.";
 	} else {
