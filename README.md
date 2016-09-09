@@ -26,7 +26,7 @@ Reads card data.
 
 ### .write(object)
 
-Write EmMarine data to a card. Returns object with information about operation status. Expects first argument to be an object.
+Writes EmMarine data to a card. Returns object with information about operation status. Expects first argument to be an object.
 
 ## Example usage
 
