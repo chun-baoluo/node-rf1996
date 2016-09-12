@@ -50,7 +50,7 @@ typedef DWORD (*pfnReadCard)(SCardInfo* CardInfo);
 
 typedef DWORD (*pfnWriteCard)(DWORD LimitLocks);
 typedef DWORD (*pfnInitCard)(BYTE *EmMarineCode);
-
+typedef DWORD (*pfnClearCard)();
 
 HMODULE lib;
 SCardInfo CardInfo;
@@ -65,3 +65,4 @@ pfnGetDeviceInfoA GetDeviceInfoA;
 
 pfnWriteCard WriteCard;
 pfnInitCard	InitCard;
+pfnClearCard ClearCard;

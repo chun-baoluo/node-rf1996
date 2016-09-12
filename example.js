@@ -4,9 +4,11 @@ rf1996.open('COM5', function(err) {
 	if(!err) {
 		console.log(rf1996.device());
 		
+		rf1996.clear();
+
 		rf1996.write({
 			brackets: 99,
-			group: 125,
+			group: 121,
 			decimal: 123
 		});
 		

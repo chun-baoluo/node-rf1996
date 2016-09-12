@@ -26,7 +26,11 @@ Reads card data.
 
 ### .write(object)
 
-Writes EmMarine data to a card. Returns object with information about operation's status. Expects first argument to be an object.
+Writes EmMarine data to a card. Returns an object with information about operation's status. Expects first argument to be an object.
+
+### .clear()
+
+Wipes out data from card.
 
 ## Example usage
 
@@ -49,6 +53,8 @@ rf1996.open('COM5', function(err) { // Open device connected to certain COM port
 				cards: '10'
 			}
 		*/
+
+		rf1996.clear();
 
 		rf1996.write({ // Writes [0099] 125,00123
 			brackets: 99,

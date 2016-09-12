@@ -14,7 +14,7 @@ void open(const FunctionCallbackInfo<Value>& args) {
 	Local<Function> cb = Local<Function>::Cast(args[1]);
 
 	lib = LoadLibrary(_T("./node_modules/rf1996/src/rf1996.dll"));
-	// lib = LoadLibrary(_T("./src/rf1996.dll"));
+	//lib = LoadLibrary(_T("./src/rf1996.dll"));
 	if(!lib) {
 		error = "RF1996.dll not found! The default path is './node_modules/rf1996/src/rf1996.dll'. Try to change the path in rf1996.cpp and recompile the module using node-gyp rebuild.";
 	} else {
@@ -26,9 +26,9 @@ void open(const FunctionCallbackInfo<Value>& args) {
 
 		GetDeviceInfoA = (pfnGetDeviceInfoA)GetProcAddress(lib,	"GetDeviceInfoA");
 
-		WriteCard	= (pfnWriteCard)GetProcAddress(lib,	"WriteCard");
-		InitCard			= (pfnInitCard)GetProcAddress(lib, "InitCard");
-
+		WriteCard = (pfnWriteCard)GetProcAddress(lib,	"WriteCard");
+		InitCard = (pfnInitCard)GetProcAddress(lib, "InitCard");
+		ClearCard	= (pfnClearCard)GetProcAddress(lib,		"ClearCard");
 		InitLib();
 
     	OpenDeviceA(port);
@@ -76,7 +76,6 @@ void read(const FunctionCallbackInfo<Value>& args) {
 
 	obj->Set(String::NewFromUtf8(isolate, "card"), String::NewFromUtf8(isolate, str));
 
-	
 	for( int i=0; i < 8; i++) {
 		len += wsprintf(str + len, _T("%02x "), CardInfo.TemicCode[i]);
 	}	
@@ -179,6 +178,11 @@ void device(const FunctionCallbackInfo<Value>& args) {
     args.GetReturnValue().Set(obj);
 }
 
+// Clear card
+void clear(const FunctionCallbackInfo<Value>& args) {
+	ClearCard();
+}
+
 // Close connection
 void close(const FunctionCallbackInfo<Value>& args) {
 	CloseDevice();
@@ -189,6 +193,7 @@ void RegisterModule(Local<Object> exports) {
 	NODE_SET_METHOD(exports, "open", open);
 	NODE_SET_METHOD(exports, "read", read);
 	NODE_SET_METHOD(exports, "write", write);
+	NODE_SET_METHOD(exports, "clear", clear);
 	NODE_SET_METHOD(exports, "device", device);
 	NODE_SET_METHOD(exports, "close", close);
 }
