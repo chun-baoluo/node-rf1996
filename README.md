@@ -30,7 +30,7 @@ Writes EmMarine data to a card. Returns an object with information about operati
 
 ### .clear()
 
-Wipes out data from card.
+Wipes out data from a card.
 
 ## Example usage
 
