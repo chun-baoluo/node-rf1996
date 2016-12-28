@@ -1,13 +1,13 @@
 # rf1996
 
-IronLogic RF1996 library wrapper for Node.js. Works on Windows only and no support for x64 yet, due to current IronLogic SDK restrictions.
+IronLogic RF1996 (Z2-USB 1996) library wrapper for Node.js. Works on Windows only and no support for 32bit Node.js, due to library's restrictions.
 
 ## Installation
 
-Make sure Windows Template Library is installed in your Visual Studio (you can install it using NuGet), then you can proceed with npm installation:
-
 ```sh
+
 $ npm install rf1996
+
 ```
 
 ## Methods
@@ -27,6 +27,18 @@ Reads card data.
 ### .write(object)
 
 Writes EmMarine data to a card. Returns an object with information about operation's status. Expects first argument to be an object.
+
+```js
+
+	// Object example
+	// Writes [0099] 125,00123
+	{
+		brackets: 99,
+		group: 125,
+		decimal: 123
+	}
+
+```
 
 ### .clear()
 

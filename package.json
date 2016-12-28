@@ -1,13 +1,13 @@
 {
   "name": "rf1996",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "scripts": {
   	"install": "node-gyp rebuild"
   },
   "gypfile": true,
-  "description": "Ironlogic RF1996 library wrapper for Node.js.",
+  "description": "Ironlogic RF1996 (Z2-USB 1996) library wrapper for Node.js.",
   "main": "index.js",
-  "keywords": ["ironlogic", "rf1996", "temic", "rfid", "Em-Marine"],
+  "keywords": ["ironlogic", "rf1996", "temic", "rfid", "Em-Marine", "Z2", "Z2-USB"],
   "author": "Pavel Bakharev",
   "license": "MIT",
   "repository": {
