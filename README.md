@@ -1,6 +1,6 @@
 # rf1996
 
-IronLogic RF1996 (Z2-USB 1996) library wrapper for Node.js. Works on Windows only and no support for 32bit Node.js, due to library's restrictions.
+IronLogic RF1996 (Z2-USB 1996) library wrapper for Node.js. Works on Windows and supports 32bit Node.js only, due to library's restrictions.
 
 ## Installation
 
