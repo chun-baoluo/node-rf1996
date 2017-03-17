@@ -1,6 +1,6 @@
 {
   "name": "rf1996",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "scripts": {
   	"install": "node-gyp rebuild"
   },
@@ -12,6 +12,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bakharevpavel/node-rf1996.git"
+    "url": "git+https://github.com/star-collector/node-rf1996.git"
   }
 }
